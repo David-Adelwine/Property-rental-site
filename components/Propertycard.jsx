@@ -1,8 +1,26 @@
 import Image from "next/image";
 import Link from "next/link";
-import {FaBed,FaBath, FaRulerCombined,FaMoneyBill,FaMapMarker} from 'react-icons/fa'
+import {
+  FaBed,
+  FaBath,
+   FaRulerCombined,
+   FaMoneyBill,
+   FaMapMarker
+  } from 'react-icons/fa'
 
 const PropertyCard = ({property}) => {
+  const getRateDisplay = ()=>{
+    const {rates} = property;
+    if (rates.monthly){
+      return `$${rates.monthly.toLocaleString()}/mo`;
+      
+    } else if (rates.weekly){
+      return `$${rates.weekly.toLocaleString()}/wk`;
+        
+    } else if (rates.nightly){
+      return `$${rates.nightly.toLocaleString()}/night`;
+    }
+  }
   return ( 
     // <!-- Listing 1 -->
     <div className="rounded-xl shadow-md relative">
@@ -22,7 +40,7 @@ const PropertyCard = ({property}) => {
         <h3
           className="absolute top-[10px] right-[10px] bg-white px-4 py-2 rounded-lg text-blue-500 font-bold text-right md:text-center lg:text-right"
         >
-          $4,200/mo
+          {getRateDisplay()}
         </h3>
 
         <div className="flex justify-center gap-4 text-gray-500 mb-4">
